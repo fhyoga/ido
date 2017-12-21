@@ -1,11 +1,13 @@
 var mysql = require('mysql')
+var moment=require('moment')
 
 function Mysql() {
     var sqlIns = mysql.createPool({
-        host: 'localhost',
+        host: '192.168.18.240',
+        port:'3309',
         user: 'root',
-        password: 'meixi072614',
-        database: 'my_blog_post'
+        password: '123456',
+        database: 'db_questionnaire'
     })
 
 
@@ -15,8 +17,7 @@ function Mysql() {
                 if(err){
                     reject(err)
                 }
-                
-                resolve(res)
+                resolve(JSON.stringify(res))
             })
         }).catch(err=>console.log(err))
     }
@@ -32,27 +33,20 @@ function Mysql() {
     //         }
 
     this.getAll= async function() {
-        var result=[]
-        await query('select * from post').then(res=>result=res)
-        return result
+       return await query('select * from question')
     }
 
     this.get = async function (id) {
         var r=[]
         await query('select id,title,content from post where id=' + id).then(res=>r=res)
         return r
-        
     }
 
-    this.add=async function(obj) {
-        var r = []
-        await query(`insert into post (title,content) values ('${obj.title}','${obj.content}')`).then(res=>r=res)
-
+    this.addQuestionnaire=async function(obj) {
+        var r = [] 
+        await query(`insert into questionnaire (title,dateline,deadline,isRelease) values ('${obj.title}',${moment.utc()},${obj.deadline},${obj.isRelease})`).then(res=>r=res)
         return r
     }
-
-
-
 }
 
 module.exports = new Mysql()
