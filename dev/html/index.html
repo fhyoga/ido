@@ -6,16 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
+    <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="../css/swiper-3.4.2.min.css">
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-     
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img class="i_1_m" src="../img/sor/09.jpg" alt="">
+                <img class="i_1_1" src="../img/1_1.png" sty alt="">
+                <img class="i_1_2" src="../img/1_2.png" alt="">
+                <img class="i_1_3" src="../img/1_3.png" alt="">
+
+                <img class="i_1_4" src="../img/1_4.png" alt="">
+
+                <img class="i_1_5" src="../img/1_5.png" alt="">
+                <img class="i_1_1" src="../img/1_6.png" alt="">
+                <img class="i_1_1" src="../img/1_7.png" alt="">
+                
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/02.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/03.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/04.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/05.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/06.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/07.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/08.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/09.jpg" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../img/sor/10.jpg" alt="">
+            </div>
+        </div>
+    </div>
     <script src="../js/jquery-1.9.1.min.js"></script>
     <script src="../js/fastclick.min.js"></script>
     <script src="../js/swiper-3.4.2.jquery.min.js"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            // autoplay: 1000,//可选选项，自动滑动
+            direction: 'vertical',
+            height: window.innerHeight,
+            effect: 'coverflow',
+            slidesPerView: 1,
+            centeredSlides: false,
+            coverflow: {
+                rotate: 0,
+                stretch: 80,
+                depth: 100,
+                modifier: 2,
+                slideShadows: false
+            },
+            onTransitionStart: function (swiper) {
+            }
+        })
+    </script>
 </body>
 
 </html>

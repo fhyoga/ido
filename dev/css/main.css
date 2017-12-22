@@ -1,0 +1,9 @@
+.swiper-slide {
+  /* height: 100vh */
+  position: relative;
+}
+
+.swiper-slide img + img {
+  width: 100%;
+  position: absolute;
+}
