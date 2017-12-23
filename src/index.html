@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>dd</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/pp.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="pages">
+
+            <!-- 第一屏 -->
+            <div class="page" style="background-color:aqua">
+                <img class="i_1_m" src="./img/sor/09.jpg" alt="">
+            </div>
+
+            <!-- 第二屏 -->
+            <div class="page" style="background-color:blanchedalmond">
+                <img src="./img/sor/02.jpg" alt="">
+            </div>
+
+            <!-- 第三屏 -->
+            <div class="page" style="background-color:coral">
+                <img src="./img/sor/03.jpg" alt="">
+            </div>
+            <div class="page" style="background-color:aqua">
+                <img class="i_1_m" src="./img/sor/04.jpg" alt="">
+            </div>
+
+            <!-- 第二屏 -->
+            <div class="page" style="background-color:blanchedalmond">
+                <img src="./img/sor/05.jpg" alt="">
+            </div>
+
+            <!-- 第三屏 -->
+            <div class="page" style="background-color:coral">
+                <img src="./img/sor/06.jpg" alt="">
+            </div>
+            <div class="page" style="background-color:aqua">
+                <img class="i_1_m" src="./img/sor/07.jpg" alt="">
+            </div>
+
+            <!-- 第二屏 -->
+            <div class="page" style="background-color:blanchedalmond">
+                <img src="./img/sor/08.jpg" alt="">
+            </div>
+
+            <!-- 第三屏 -->
+            <div class="page" style="background-color:coral">
+                <img src="./img/sor/09.jpg" alt="">
+            </div>
+
+
+        </div>
+    </div>
+    <script src="./js/zepto.js"></script>
+    <script src="./js/pp.js"></script>
+
+    <script>
+        $('.pages').parallax({
+            swipeAnim: 'cover',
+            arrow: true,
+            loading: true
+        });
+    </script>
+</body>
+
+</html>
