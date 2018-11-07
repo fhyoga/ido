@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "cssnano": "^4.1.7",
+    "less": "^3.8.1"
+  }
+}
