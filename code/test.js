@@ -1,8 +1,10 @@
+// ==q1
 // import q1 from './q-1';
 // test('q1返回数组内相加等于目标数字的项的索引', () => {
 //   expect(q1([2, 7, 11, 15], 9)).toEqual([0, 1]);
 // });
 
+// ==q2
 // import q2 from './q-2';
 // let l1 = {
 //   val: 2,
@@ -19,22 +21,37 @@
 //   });
 // });
 
-import q3 from './q-3';
+// ==q3
+// import q3 from './q-3';
 
-describe('q3无重复字符的最长子串', () => {
-  test('abcabcdbb', () => {
-    expect(q3('abcabcdbb')).toBe(4);
+// describe('q3无重复字符的最长子串', () => {
+//   test('abcabcdbb', () => {
+//     expect(q3('abcabcdbb')).toBe(4);
+//   });
+//   test('d', () => {
+//     expect(q3(' ')).toBe(1);
+//   });
+//   test('空白', () => {
+//     expect(q3('')).toBe(0);
+//   });
+//   test('au', () => {
+//     expect(q3('au')).toBe(2);
+//   });
+//   test('dvdf', () => {
+//     expect(q3('dvdf')).toBe(3);
+//   });
+// });
+
+// ==q5
+import q5 from './q-5';
+describe('q5最长回文子串', () => {
+  test('caba', () => {
+    expect(q5('caba')).toBe('aba');
   });
-  test('d', () => {
-    expect(q3(' ')).toBe(1);
+  test('babad', () => {
+    expect(q5('babad')).toBe('aba');
   });
-  test('空白', () => {
-    expect(q3('')).toBe(0);
-  });
-  test('au', () => {
-    expect(q3('au')).toBe(2);
-  });
-  test('dvdf', () => {
-    expect(q3('dvdf')).toBe(3);
+  test('cbbd', () => {
+    expect(q5('cbbd')).toBe('bb');
   });
 });
