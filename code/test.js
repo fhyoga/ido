@@ -43,15 +43,41 @@
 // });
 
 // ==q5
-import q5 from './q-5';
-describe('q5最长回文子串', () => {
-  test('caba', () => {
-    expect(q5('caba')).toBe('aba');
-  });
-  test('babad', () => {
-    expect(q5('babad')).toBe('aba');
-  });
-  test('cbbd', () => {
-    expect(q5('cbbd')).toBe('bb');
+// import q5 from './q-5';
+// describe('q5最长回文子串', () => {
+//   test('caba', () => {
+//     expect(q5('caba')).toBe('aba');
+//   });
+//   test('babad', () => {
+//     expect(q5('babad')).toBe('aba');
+//   });
+//   test('cbbd', () => {
+//     expect(q5('cbbd')).toBe('bb');
+//   });
+// });
+
+// ==q20
+import q20 from './q-20';
+describe('有效的括号', () => {
+  // test('{({[]})}', () => {
+  //   expect(q20('{({[]})}')).toBe(true);
+  // });
+  // test('{({})', () => {
+  //   expect(q20('{({})')).toBe(false);
+  // });
+  // test('{({})]', () => {
+  //   expect(q20('{({})')).toBe(false);
+  // });
+  // test('', () => {
+  //   expect(q20('')).toBe(true);
+  // });
+  // test('(()(', () => {
+  //   expect(q20('(()(')).toBe(false);
+  // });
+  // test('(()]', () => {
+  //   expect(q20('(()]')).toBe(false);
+  // });
+  test("{{)}", () => {
+    expect(q20("{{)}")).toBe(false);
   });
 });
