@@ -4,7 +4,8 @@
   "description": "",
   "main": "q-1.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "new":"node generateCode.js"
   },
   "devDependencies": {
     "jest": "^23.6.0",
@@ -16,7 +17,7 @@
   "license": "ISC",
   "jest": {
     "testMatch": [
-      "**/test.js"
+      "**/*+(active)/test.js"
     ]
   }
 }
