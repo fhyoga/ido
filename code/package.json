@@ -17,7 +17,8 @@
   "license": "ISC",
   "jest": {
     "testMatch": [
-      "**/*+(active)/test.js"
+      "**/*+(active)/test.js",
+      "**/helper/test.js"
     ]
   }
 }
