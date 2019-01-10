@@ -5,7 +5,7 @@
   "main": "q-1.js",
   "scripts": {
     "test": "jest",
-    "new":"node generateCode.js"
+    "new": "node generateCode.js"
   },
   "devDependencies": {
     "jest": "^23.6.0",
@@ -17,8 +17,9 @@
   "license": "ISC",
   "jest": {
     "testMatch": [
-      "**/*+(active)/test.js",
-      "**/helper/test.js"
-    ]
+      "**/*+(active)/test.js"
+    ],
+    "collectCoverage": true,
+    "verbose":true
   }
 }
