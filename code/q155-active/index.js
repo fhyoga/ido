@@ -18,7 +18,7 @@ MinStack.prototype.push = function(x) {
   } else {
     m.push(x);
   }
-  return this.stack.push(x);
+  this.stack.push(x);
 };
 
 /**
@@ -27,7 +27,6 @@ MinStack.prototype.push = function(x) {
 MinStack.prototype.pop = function() {
   let v = this.stack.pop();
   v === this.minStack[this.minStack.length - 1] ? this.minStack.pop() : null;
-  return v;
 };
 
 /**
@@ -53,12 +52,4 @@ MinStack.prototype.getMin = function() {
  * var param_4 = obj.getMin()
  */
 
-// export default MinStack;
-
-let s = new MinStack();
-console.log('s.push(0): ', s.push(0));
-console.log('s.push(1): ', s.push(1));
-console.log('s.push(0): ', s.push(0));
-console.log('s.getMin(): ', s.getMin());
-console.log('s.pop(): ', s.pop());
-console.log('s.getMin(): ', s.getMin());
+export default MinStack;
