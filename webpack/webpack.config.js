@@ -1,15 +1,19 @@
 const path = require("path");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+
 module.exports = {
   mode: "production",
   entry: {
     index: "./src/entry/index.js",
     index1: "./src/entry/index1.js",
     index2: "./src/entry/index2.js",
+    async: "./src/entry/async.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     chunkFilename: "[name].js",
+    publicPath: "dist/",
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -18,6 +22,7 @@ module.exports = {
     minimize: true,
     splitChunks: { chunks: "all", minSize: 1 },
   },
+  plugins: [new BundleAnalyzerPlugin()],
   module: {
     rules: [
       {
@@ -27,6 +32,7 @@ module.exports = {
           loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
+            plugins: ["@babel/plugin-syntax-dynamic-import"],
           },
         },
       },
