@@ -1,6 +1,10 @@
 export default class Promise1 {
   constructor(executor) {
-    executor(this.resolve, this.reject);
+    try {
+      executor(this.resolve, this.reject);
+    } catch (err) {
+      this.reject(err);
+    }
   }
   static Constant = {
     PENDING: "PENDING",
@@ -24,17 +28,31 @@ export default class Promise1 {
     setTimeout(run, 0);
   };
   reject = err => {
+    let { onRejectedStack } = this;
+    this.value = err;
     this.status = Promise1.Constant.REJECTED;
+    let cb = null;
+    while ((cb = onRejectedStack.shift())) {
+      cb(err);
+    }
   };
-  then(handleFulfilled) {
-    const { status, onFulfilledStack, onRejectedStack } = this;
+  then(handleFulfilled, handleRejected) {
+    const { value, status, onFulfilledStack, onRejectedStack } = this;
     return new Promise1((onFulfilledNext, onRejectedNext) => {
       const onFulfilled = value => {
         let res = handleFulfilled(value);
-        onFulfilledNext(res);
+        if (res instanceof Promise1) {
+          res.then(onFulfilledNext, onRejectedNext);
+        } else {
+          onFulfilledNext(res);
+        }
       };
-      const onRejected = () => {
-        handleRejected(value);
+      const onRejected = err => {
+        if (handleRejected) {
+          handleRejected(err);
+        } else {
+          onRejectedNext(err);
+        }
       };
       switch (status) {
         case Promise1.Constant.PENDING:
@@ -51,6 +69,6 @@ export default class Promise1 {
     });
   }
   catch(handle) {
-    this.rejectStack.push(handle);
+    return this.then(null, handle);
   }
 }
