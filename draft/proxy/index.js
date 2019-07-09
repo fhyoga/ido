@@ -12,3 +12,24 @@ var obj = new Proxy(
   },
 );
 window.obj = obj;
+
+import * as rrweb from "rrweb";
+import RrwebPlayer from "rrweb-player";
+let events = [];
+rrweb.record({
+  emit(event) {
+    // 将 event 存入 events 数组中
+    events.push(event);
+  },
+});
+document.querySelector("#replay").addEventListener("click", () => {
+  console.log(events);
+  new RrwebPlayer({
+    target: document.querySelector("#app"),
+    data: {
+      events,
+      width: 800,
+      height: 500,
+    },
+  });
+});
