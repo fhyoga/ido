@@ -1,4 +1,7 @@
-export default class Promise1 {
+const PENDING = "PENDING";
+const FULFILLED = "FULFILLED";
+const REJECTED = "REJECTED";
+class Promise1 {
   constructor(executor) {
     try {
       executor(this.resolve, this.reject);
@@ -6,69 +9,116 @@ export default class Promise1 {
       this.reject(err);
     }
   }
-  static Constant = {
-    PENDING: "PENDING",
-    FULFILLED: "FULFILLED",
-    REJECTED: "REJECTED",
-  };
-  status = Promise1.Constant.PENDING;
-  value = "";
-  onFulfilledStack = [];
-  onRejectedStack = [];
-  resolve = val => {
-    const run = () => {
-      let { onFulfilledStack } = this;
-      this.value = val;
-      this.status = Promise1.Constant.FULFILLED;
+  status = PENDING;
+  value = null;
+  resolvedCbQueue = [];
+  rejectedCbQueue = [];
+  resolve = value => {
+    if (value instanceof Promise1) {
+      value.then(this.resolve, this.reject);
+    }
+    if (this.status === PENDING) {
+      this.status = FULFILLED;
+      this.value = value;
       let cb = null;
-      while ((cb = onFulfilledStack.shift())) {
-        cb(val);
+      while ((cb = this.resolvedCbQueue.shift())) {
+        this.value = cb(this.value);
       }
-    };
-    setTimeout(run, 0);
-  };
-  reject = err => {
-    let { onRejectedStack } = this;
-    this.value = err;
-    this.status = Promise1.Constant.REJECTED;
-    let cb = null;
-    while ((cb = onRejectedStack.shift())) {
-      cb(err);
     }
   };
-  then(handleFulfilled, handleRejected) {
-    const { value, status, onFulfilledStack, onRejectedStack } = this;
-    return new Promise1((onFulfilledNext, onRejectedNext) => {
-      const onFulfilled = value => {
-        let res = handleFulfilled(value);
-        if (res instanceof Promise1) {
-          res.then(onFulfilledNext, onRejectedNext);
-        } else {
-          onFulfilledNext(res);
+  reject = value => {
+    if (this.status === PENDING) {
+      this.status = REJECTED;
+      this.value = value;
+      let cb = null;
+      while ((cb = this.resolvedCbQueue.shift())) {
+        try {
+          cb(value);
+        } catch (err) {
+          this.value = err;
         }
-      };
-      const onRejected = err => {
-        if (handleRejected) {
-          handleRejected(err);
-        } else {
-          onRejectedNext(err);
-        }
-      };
-      switch (status) {
-        case Promise1.Constant.PENDING:
-          onFulfilledStack.push(onFulfilled);
-          onRejectedStack.push(onRejected);
-          break;
-        case Promise1.Constant.FULFILLED:
-          handle(value);
-          break;
-        case Promise1.Constant.REJECTED:
-          onRejected(value);
-          break;
       }
-    });
+    }
+  };
+  then(onFulfilled, onRejected) {
+    let promise2 = null;
+    if (this.status === PENDING) {
+      return (promise2 = new Promise1((resolve, reject) => {
+        this.resolvedCbQueue.push(() => {
+          try {
+            const x = onFulfilled(this.value);
+            resolutionProcedure(promise2, x, resolve, reject);
+          } catch (r) {
+            reject(r);
+          }
+        });
+
+        this.rejectedCbQueue.push(() => {
+          try {
+            const x = onRejected(this.value);
+            resolutionProcedure(promise2, x, resolve, reject);
+          } catch (r) {
+            reject(r);
+          }
+        });
+      }));
+    }
+    if (that.state === RESOLVED) {
+      return (promise2 = new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+          try {
+            const x = onFulfilled(that.value);
+            resolutionProcedure(promise2, x, resolve, reject);
+          } catch (reason) {
+            reject(reason);
+          }
+        });
+      }));
+    }
   }
-  catch(handle) {
-    return this.then(null, handle);
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
   }
 }
+
+function resolutionProcedure(promise2, x, resolve, reject) {
+  if (promise2 === x) {
+    return reject(new TypeError("Error"));
+  }
+  if (x instanceof Promise1) {
+    x.then(function(value) {
+      resolutionProcedure(promise2, value, resolve, reject);
+    }, reject);
+  }
+  let called = false;
+  if (x !== null && (typeof x === "object" || typeof x === "function")) {
+    try {
+      let then = x.then;
+      if (typeof then === "function") {
+        then.call(
+          x,
+          y => {
+            if (called) return;
+            called = true;
+            resolutionProcedure(promise2, y, resolve, reject);
+          },
+          e => {
+            if (called) return;
+            called = true;
+            reject(e);
+          },
+        );
+      } else {
+        resolve(x);
+      }
+    } catch (e) {
+      if (called) return;
+      called = true;
+      reject(e);
+    }
+  } else {
+    resolve(x);
+  }
+}
+
+export default Promise1;
