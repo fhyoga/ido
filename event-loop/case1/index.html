@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>渲染几次？</title>
+  </head>
+
+  <body>
+    <div id="target"></div>
+    <script>
+      console.log(1);
+      Promise.resolve().then(() => {
+        console.log(2);
+      });
+      console.log(3);
+    </script>
+    <script>
+      console.log(5);
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>
