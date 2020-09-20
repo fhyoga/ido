@@ -21,10 +21,16 @@
 
 // console.log(new child());
 
-import { es } from '../lib/es'
-import { mt1 } from '../lib/utils'
-// var d = '../lib/common.js'
-const { common } = require('../lib/common.js')
-es()
-mt1()
-common()
+// import { es } from '../lib/es'
+// import { mt1 } from '../lib/utils'
+// // var d = '../lib/common.js'
+// const { common } = require('../lib/common.js')
+// es()
+// mt1()
+// common()
+
+console.log(111);
+
+export default () => {
+  console.log(222);
+};

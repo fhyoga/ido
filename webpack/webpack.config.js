@@ -21,7 +21,7 @@ module.exports = {
   },
   optimization: {
     minimize: true,
-    splitChunks: { chunks: 'all', minSize: 1 },
+    // splitChunks: { chunks: 'all', minSize: 1 },
   },
   plugins: [new BundleAnalyzerPlugin()],
   module: {
